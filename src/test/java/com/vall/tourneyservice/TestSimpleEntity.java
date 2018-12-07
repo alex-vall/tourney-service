@@ -2,7 +2,9 @@ package com.vall.tourneyservice;
 
 import com.vall.tourneyservice.config.DataSourceConfig;
 import com.vall.tourneyservice.config.RepositoryConfiguration;
+import com.vall.tourneyservice.model.PlayerChoice;
 import com.vall.tourneyservice.model.Tourney;
+import com.vall.tourneyservice.repository.PlayerChoiceRepository;
 import com.vall.tourneyservice.repository.TourneyRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,13 +35,16 @@ public class TestSimpleEntity {
     @Autowired
     private TourneyRepository tourneyRepository;
 
+    @Autowired
+    private PlayerChoiceRepository choiceRepository;
+
     @Test
     public void testReadAllTourneys() throws Exception {
 
         final List<Tourney> tourneys = StreamSupport.stream(tourneyRepository.findAll().spliterator(), false)
                 .collect(Collectors.toList());
 
-        assertEquals(3, tourneyRepository.count());
+        assertEquals(3, tourneys.size());
 
         final Tourney oldTourney = Tourney.builder()
                 .id(1L)
@@ -52,6 +57,25 @@ public class TestSimpleEntity {
         assertEquals(oldTourney, tourneys.get(0));
 
     }
+
+    @Test
+    public void testReadChoices() throws Exception {
+        List<PlayerChoice> choices = StreamSupport.stream(choiceRepository.findAll().spliterator(), false)
+                .collect(Collectors.toList());
+
+        assertEquals(1, choices.size());
+
+        final PlayerChoice expected = PlayerChoice.builder()
+                .id(1L)
+                .tourneyID(1L)
+                .participation(false)
+                .actionDate(buildTimestamp("2018-12-05 05:05:06.0"))
+                .build();
+
+        assertEquals(expected, choices.get(0));
+    }
+
+
 
     private Timestamp buildTimestamp(String date) throws Exception {
 
