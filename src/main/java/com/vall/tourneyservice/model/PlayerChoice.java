@@ -26,6 +26,9 @@ public class PlayerChoice {
     @Column("player_choiceid")
     private final Long id;
 
+    @Column("memberid")
+    private final long memberID;
+
     @Column("tourneyid")
     private final long tourneyID;
 

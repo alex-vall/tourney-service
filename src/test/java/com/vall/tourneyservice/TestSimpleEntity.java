@@ -67,7 +67,8 @@ public class TestSimpleEntity {
 
         final PlayerChoice expected = PlayerChoice.builder()
                 .id(1L)
-                .tourneyID(1L)
+                .memberID(10L)
+                .tourneyID(2L)
                 .participation(false)
                 .actionDate(buildTimestamp("2018-12-05 05:05:06.0"))
                 .build();
@@ -75,7 +76,25 @@ public class TestSimpleEntity {
         assertEquals(expected, choices.get(0));
     }
 
+    @Test
+    public void testAllActiveTourneys() {
 
+        final List<Tourney> tourneys = tourneyRepository.getAllActiveTourneys();
+
+        assertEquals(1, tourneys.size());
+        assertEquals("test tourney1", tourneys.get(0).getName());
+    }
+
+
+    @Test
+    public void testAllPlayersTourneys() {
+
+        final List<Tourney> tourneys = tourneyRepository.getAllPlayersTourneys(10L);
+
+        assertEquals(1, tourneys.size());
+        assertEquals("active tourney1", tourneys.get(0).getName());
+
+    }
 
     private Timestamp buildTimestamp(String date) throws Exception {
 
