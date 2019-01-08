@@ -44,7 +44,7 @@ public class TestSimpleEntity {
         final List<Tourney> tourneys = StreamSupport.stream(tourneyRepository.findAll().spliterator(), false)
                 .collect(Collectors.toList());
 
-        assertEquals(3, tourneys.size());
+        assertEquals(4, tourneys.size());
 
         final Tourney oldTourney = Tourney.builder()
                 .id(1L)
@@ -81,7 +81,7 @@ public class TestSimpleEntity {
 
         final List<Tourney> tourneys = tourneyRepository.getAllActiveTourneys();
 
-        assertEquals(1, tourneys.size());
+        assertEquals(2, tourneys.size());
         assertEquals("test tourney1", tourneys.get(0).getName());
     }
 
