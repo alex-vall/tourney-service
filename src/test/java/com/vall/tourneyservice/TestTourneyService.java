@@ -7,11 +7,10 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 
-import static org.junit.Assert.assertNotNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
@@ -30,18 +29,41 @@ public class TestTourneyService {
     @Test
     public void testTourneyListNewMember() throws Exception {
 
-        assertNotNull(mockMvc);
-
-        MvcResult result = mockMvc.perform(
+        mockMvc.perform(
                 get("/tournaments/list").param("playerid", "500")
         )
                 .andExpect(status().isOk())
                 .andDo(print())
-                .andReturn();
-
-        //TODO: split controller tests and logic tests
+                .andExpect(content().string(
+                        "{\"status\":0," +
+                                "\"tourneys\":" +
+                                "[" +
+                                "{\"id\":2,\"name\":\"test tourney1\",\"startDate\":\"2018-02-01T00:00:00.000+0000\",\"finishDate\":\"2025-02-01T00:00:00.000+0000\",\"active\":true}," +
+                                "{\"id\":4,\"name\":\"active tourney1\",\"startDate\":\"2018-02-01T00:00:00.000+0000\",\"finishDate\":\"2025-02-01T00:00:00.000+0000\",\"active\":true}" +
+                                "]}"
+                ));
 
     }
+
+    @Test
+    public void testTourneyListWithExclusion() throws Exception {
+
+        mockMvc.perform(
+                get("/tournaments/list").param("playerid", "10")
+        )
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andExpect(content().string(
+                        "{\"status\":0," +
+                                "\"tourneys\":" +
+                                "[" +
+                                "{\"id\":4,\"name\":\"active tourney1\",\"startDate\":\"2018-02-01T00:00:00.000+0000\",\"finishDate\":\"2025-02-01T00:00:00.000+0000\",\"active\":true}" +
+                                "]}"
+                ));
+
+    }
+
+
 
 
 }

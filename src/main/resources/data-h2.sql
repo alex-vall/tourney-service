@@ -14,8 +14,10 @@ INSERT INTO tourneys (tourneyid, name, is_active, start_date, finish_date)
     (SELECT sq_tourneyid.nextval from DUAL),
     'test tourney1',
     TRUE,
-    CURRENT_TIMESTAMP(),
-    DATEADD('MONTH', 1, CURRENT_TIMESTAMP())
+    PARSEDATETIME('1 Feb 2018 00:00:00 GMT',
+    'd MMM yyyy HH:mm:ss z', 'en', 'GMT'),
+    PARSEDATETIME('1 Feb 2025 00:00:00 GMT',
+    'd MMM yyyy HH:mm:ss z', 'en', 'GMT')
   );
 
 INSERT INTO tourneys (tourneyid, name, is_active, start_date, finish_date)
@@ -23,8 +25,10 @@ INSERT INTO tourneys (tourneyid, name, is_active, start_date, finish_date)
     (SELECT sq_tourneyid.nextval from DUAL),
     'test tourney2',
     FALSE,
-    DATEADD('MONTH', 1, CURRENT_TIMESTAMP()),
-    DATEADD('MONTH', 2, CURRENT_TIMESTAMP())
+    PARSEDATETIME('1 Feb 2025 00:00:00 GMT',
+    'd MMM yyyy HH:mm:ss z', 'en', 'GMT'),
+    PARSEDATETIME('1 Feb 2030 00:00:00 GMT',
+    'd MMM yyyy HH:mm:ss z', 'en', 'GMT'),
   );
 
   INSERT INTO tourneys (tourneyid, name, is_active, start_date, finish_date)
@@ -32,8 +36,10 @@ INSERT INTO tourneys (tourneyid, name, is_active, start_date, finish_date)
     (SELECT sq_tourneyid.nextval from DUAL),
     'active tourney1',
     TRUE,
-    CURRENT_TIMESTAMP(),
-    DATEADD('MONTH', 1, CURRENT_TIMESTAMP())
+    PARSEDATETIME('1 Feb 2018 00:00:00 GMT',
+    'd MMM yyyy HH:mm:ss z', 'en', 'GMT'),
+    PARSEDATETIME('1 Feb 2025 00:00:00 GMT',
+    'd MMM yyyy HH:mm:ss z', 'en', 'GMT')
   );
 
 INSERT INTO player_choices (player_choiceid, tourneyid, memberid, participation, action_date)

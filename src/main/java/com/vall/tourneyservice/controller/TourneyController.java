@@ -1,5 +1,7 @@
 package com.vall.tourneyservice.controller;
 
+import com.vall.tourneyservice.dto.BaseResponse;
+import com.vall.tourneyservice.dto.Choice;
 import com.vall.tourneyservice.dto.ResponseStatus;
 import com.vall.tourneyservice.dto.TourneyResponse;
 import com.vall.tourneyservice.service.TourneyService;
@@ -24,7 +26,7 @@ public class TourneyController {
     }
 
     @GetMapping(value = "/tournaments/list")
-    public TourneyResponse getTourneyList(@RequestParam(value = "playerid") long playerID) {
+    public TourneyResponse getTourneyList(@RequestParam("playerid") long playerID) {
 
         if (playerID <= 0) {
             return TourneyResponse.builder().status(ResponseStatus.INVALID_MEMBER_ID.getStatus()).build();
@@ -35,5 +37,16 @@ public class TourneyController {
                 .tourneys(tourneyService.getTourneyList(playerID))
                 .build();
     }
+
+    @GetMapping("/tournaments/player")
+    public BaseResponse playerChoice(@RequestParam("playerid") long playerID,
+                                     @RequestParam("tournament") long tourneyID,
+                                     @RequestParam("choice") Choice choice) {
+
+        //TODO: implement
+        return null;
+    }
+
+
 
 }
