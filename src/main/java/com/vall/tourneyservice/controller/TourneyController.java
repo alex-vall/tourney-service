@@ -43,10 +43,20 @@ public class TourneyController {
                                      @RequestParam("tournament") long tourneyID,
                                      @RequestParam("choice") Choice choice) {
 
-        //TODO: implement
-        return null;
-    }
+        if (playerID <= 0) {
+            return BaseResponse.builder().status(ResponseStatus.INVALID_MEMBER_ID.getStatus()).build();
+        }
 
+        if (tourneyID <= 0) {
+            return BaseResponse.builder().status(ResponseStatus.INVALID_TOURNEY_ID.getStatus()).build();
+        }
+
+        tourneyService.playerChoice(playerID, tourneyID, choice);
+
+        return BaseResponse.builder()
+                .status(ResponseStatus.OK.getStatus())
+                .build();
+    }
 
 
 }

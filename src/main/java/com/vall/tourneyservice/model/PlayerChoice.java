@@ -32,9 +32,11 @@ public class PlayerChoice {
     @Column("tourneyid")
     private final long tourneyID;
 
+    @Wither
     private boolean participation;
 
     @Column("action_date")
+    @Wither
     private Timestamp actionDate;
 
 }

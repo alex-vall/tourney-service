@@ -64,6 +64,25 @@ public class TestTourneyService {
     }
 
 
+    @Test
+    public void testPlayerChoiceSaveNew() throws Exception {
+
+        mockMvc.perform(
+                get("/tournaments/player")
+                        .param("playerid", "11")
+                        .param("tournament", "2")
+                        .param("choice", "OPTIN")
+        )
+                .andExpect(status().isOk())
+                .andDo(print());
+
+        //TODO: check if save applies
+
+    }
+
+
+
+
 
 
 }

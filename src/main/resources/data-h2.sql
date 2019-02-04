@@ -51,4 +51,13 @@ INSERT INTO player_choices (player_choiceid, tourneyid, memberid, participation,
     PARSEDATETIME('5 Dec 2018 03:05:06 GMT',
         'd MMM yyyy HH:mm:ss z', 'en', 'GMT'),
   );
+INSERT INTO player_choices (player_choiceid, tourneyid, memberid, participation, action_date)
+  VALUES (
+    (SELECT sq_player_choiceid.nextval from DUAL),
+    1,
+    10,
+    TRUE,
+    PARSEDATETIME('5 Dec 2018 03:10:06 GMT',
+        'd MMM yyyy HH:mm:ss z', 'en', 'GMT'),
+  );
 
