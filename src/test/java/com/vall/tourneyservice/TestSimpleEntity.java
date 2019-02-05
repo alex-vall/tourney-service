@@ -11,6 +11,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureJdbc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.sql.Timestamp;
@@ -30,6 +31,7 @@ import static org.junit.Assert.assertEquals;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {DataSourceConfig.class, RepositoryConfiguration.class})
 @AutoConfigureJdbc
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 public class TestSimpleEntity {
 
     @Autowired
@@ -63,10 +65,10 @@ public class TestSimpleEntity {
         List<PlayerChoice> choices = StreamSupport.stream(choiceRepository.findAll().spliterator(), false)
                 .collect(Collectors.toList());
 
-        assertEquals(1, choices.size());
+        assertEquals(2, choices.size());
 
         final PlayerChoice expected = PlayerChoice.builder()
-                .id(1L)
+                .player_choiceid(1L)
                 .memberID(10L)
                 .tourneyID(2L)
                 .participation(false)

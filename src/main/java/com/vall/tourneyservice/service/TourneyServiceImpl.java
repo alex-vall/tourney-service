@@ -37,6 +37,9 @@ public class TourneyServiceImpl implements TourneyService {
     @Override
     public void playerChoice(long memberID, long tourneyID, Choice choice) {
 
+
+        final PlayerChoice tmp = playerChoiceRepository.findByMemberIDAndTourneyID(memberID, tourneyID);
+
         final PlayerChoice playerChoice = Optional.ofNullable(playerChoiceRepository.findByMemberIDAndTourneyID(memberID, tourneyID))
                 .map(existing -> existing
                         .withParticipation(choice.isParticipation())

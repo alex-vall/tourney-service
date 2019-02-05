@@ -24,7 +24,7 @@ public class PlayerChoice {
     @Id
     @Wither
     @Column("player_choiceid")
-    private final Long id;
+    private final Long player_choiceid; //TODO: deal with wrong naming in spring data
 
     @Column("memberid")
     private final long memberID;
