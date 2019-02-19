@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 //TODO: add liquebase
 //TODO: controller exception handling
 //TODO: cashing?
+//TODO: MyBatis?
 
 
 @SpringBootApplication
