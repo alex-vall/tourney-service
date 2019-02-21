@@ -23,8 +23,8 @@ public class PlayerChoice {
 
     @Id
     @Wither
-    @Column("player_choiceid")
-    private final Long playerChoiceId;
+//    @Column("player_choiceid")
+    private final Long player_choiceid;
 
     @Column("memberid")
     private final long memberID;

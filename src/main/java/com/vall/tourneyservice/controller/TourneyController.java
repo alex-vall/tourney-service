@@ -26,14 +26,18 @@ public class TourneyController {
     }
 
     @GetMapping(value = "/tournaments/list")
-    public TourneyResponse getTourneyList(@RequestParam("playerid") long playerID) {
+    public TourneyResponse getTourneyList(@RequestParam(value = "playerid") long playerID) {
 
         if (playerID <= 0) {
-            return TourneyResponse.builder().status(ResponseStatus.INVALID_MEMBER_ID.getStatus()).build();
+            return TourneyResponse.builder().baseResponse(
+                    BaseResponse.builder()
+                            .status(ResponseStatus.INVALID_ID_VALUE.getStatus())
+                            .error("Invalid 'playerid' param")
+                            .build())
+                    .build();
         }
 
         return TourneyResponse.builder()
-                .status(ResponseStatus.OK.getStatus())
                 .tourneys(tourneyService.getTourneyList(playerID))
                 .build();
     }
@@ -44,17 +48,22 @@ public class TourneyController {
                                      @RequestParam("choice") Choice choice) {
 
         if (playerID <= 0) {
-            return BaseResponse.builder().status(ResponseStatus.INVALID_MEMBER_ID.getStatus()).build();
+            return BaseResponse.builder()
+                    .status(ResponseStatus.INVALID_ID_VALUE.getStatus())
+                    .error("Invalid 'playerid' param")
+                    .build();
         }
 
         if (tourneyID <= 0) {
-            return BaseResponse.builder().status(ResponseStatus.INVALID_TOURNEY_ID.getStatus()).build();
+            return BaseResponse.builder()
+                    .status(ResponseStatus.INVALID_ID_VALUE.getStatus())
+                    .error("Invalid 'tourneyID' param")
+                    .build();
         }
 
         tourneyService.playerChoice(playerID, tourneyID, choice);
 
         return BaseResponse.builder()
-                .status(ResponseStatus.OK.getStatus())
                 .build();
     }
 

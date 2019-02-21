@@ -9,8 +9,11 @@ import lombok.Getter;
 public enum ResponseStatus {
 
     OK(0),
-    INVALID_MEMBER_ID (100),
-    INVALID_TOURNEY_ID (101);
+    MANDATORY_FIELD(100),
+    INVALID_ID_VALUE(101),
+    INVALID_TOURNEY_ID (102),
+    TYPE_MISMATCH(103),
+    SERVER_ERROR(500);
 
     @Getter
     private long status;

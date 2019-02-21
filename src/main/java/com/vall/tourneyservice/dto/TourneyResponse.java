@@ -2,8 +2,12 @@ package com.vall.tourneyservice.dto;
 
 import com.vall.tourneyservice.model.Tourney;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.Value;
+import lombok.experimental.SuperBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,8 +19,11 @@ import java.util.List;
 @Builder
 public class TourneyResponse {
 
-    private long status;
+    //TODO: remove aggregation, just clone fields
+    @Builder.Default
+    private BaseResponse baseResponse = BaseResponse.builder().build();
 
-    private List<Tourney> tourneys;
+    @Builder.Default
+    private List<Tourney> tourneys = new ArrayList<>();
 
 }

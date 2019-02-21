@@ -36,7 +36,7 @@ public class TestTourneyService {
         )
                 .andExpect(status().isOk())
                 .andExpect(content().string(
-                        "{\"status\":0," +
+                        "{\"baseResponse\":{\"status\":0,\"error\":\"\"}," +
                                 "\"tourneys\":" +
                                 "[" +
                                 "{\"id\":2,\"name\":\"test tourney1\",\"startDate\":\"2018-02-01T00:00:00.000+0000\",\"finishDate\":\"2025-02-01T00:00:00.000+0000\",\"active\":true}," +
@@ -54,7 +54,7 @@ public class TestTourneyService {
         )
                 .andExpect(status().isOk())
                 .andExpect(content().string(
-                        "{\"status\":0," +
+                        "{\"baseResponse\":{\"status\":0,\"error\":\"\"}," +
                                 "\"tourneys\":" +
                                 "[" +
                                 "{\"id\":4,\"name\":\"active tourney1\",\"startDate\":\"2018-02-01T00:00:00.000+0000\",\"finishDate\":\"2025-02-01T00:00:00.000+0000\",\"active\":true}" +
@@ -75,7 +75,7 @@ public class TestTourneyService {
         )
                 .andExpect(status().isOk())
                 .andExpect(content().string(
-                        "{\"status\":0," +
+                        "{\"baseResponse\":{\"status\":0,\"error\":\"\"}," +
                                 "\"tourneys\":" +
                                 "[" +
                                 "{\"id\":2,\"name\":\"test tourney1\",\"startDate\":\"2018-02-01T00:00:00.000+0000\",\"finishDate\":\"2025-02-01T00:00:00.000+0000\",\"active\":true}," +
@@ -93,7 +93,7 @@ public class TestTourneyService {
         )
                 .andExpect(status().isOk())
                 .andExpect((content().string(
-                        "{\"status\":0}"
+                        "{\"status\":0,\"error\":\"\"}"
                 )));
 
         //check after cancel
@@ -102,7 +102,7 @@ public class TestTourneyService {
         )
                 .andExpect(status().isOk())
                 .andExpect(content().string(
-                        "{\"status\":0," +
+                        "{\"baseResponse\":{\"status\":0,\"error\":\"\"}," +
                                 "\"tourneys\":" +
                                 "[" +
                                 "{\"id\":4,\"name\":\"active tourney1\",\"startDate\":\"2018-02-01T00:00:00.000+0000\",\"finishDate\":\"2025-02-01T00:00:00.000+0000\",\"active\":true}" +
@@ -122,7 +122,7 @@ public class TestTourneyService {
         )
                 .andExpect(status().isOk())
                 .andExpect(content().string(
-                        "{\"status\":0," +
+                        "{\"baseResponse\":{\"status\":0,\"error\":\"\"}," +
                                 "\"tourneys\":" +
                                 "[" +
                                 "{\"id\":2,\"name\":\"test tourney1\",\"startDate\":\"2018-02-01T00:00:00.000+0000\",\"finishDate\":\"2025-02-01T00:00:00.000+0000\",\"active\":true}," +
@@ -140,7 +140,7 @@ public class TestTourneyService {
         )
                 .andExpect(status().isOk())
                 .andExpect((content().string(
-                        "{\"status\":0}"
+                        "{\"status\":0,\"error\":\"\"}"
                 )));
 
 
@@ -152,7 +152,7 @@ public class TestTourneyService {
         )
                 .andExpect(status().isOk())
                 .andExpect((content().string(
-                        "{\"status\":0}"
+                        "{\"status\":0,\"error\":\"\"}"
                 )));
 
 
@@ -163,7 +163,7 @@ public class TestTourneyService {
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().string(
-                        "{\"status\":0," +
+                        "{\"baseResponse\":{\"status\":0,\"error\":\"\"}," +
                                 "\"tourneys\":" +
                                 "[" +
                                 "{\"id\":2,\"name\":\"test tourney1\",\"startDate\":\"2018-02-01T00:00:00.000+0000\",\"finishDate\":\"2025-02-01T00:00:00.000+0000\",\"active\":true}," +
@@ -171,5 +171,36 @@ public class TestTourneyService {
                                 "]}"
                 ));
     }
+
+
+    @Test
+    public void testTourneyListNoParam() throws Exception {
+        mockMvc.perform(
+                get("/tournaments/list")
+        )
+                .andExpect(status().isOk())
+                .andExpect(content().string(
+                        "{\"status\":100," +
+                                "\"error\":\"Required long parameter 'playerid' is not present\"}"
+                ));
+    }
+
+    @Test
+    public void testBadTypeOfParam() throws Exception {
+
+        mockMvc.perform(
+                get("/tournaments/list").param("playerid", "500d")
+        )
+                .andExpect(status().isOk())
+                .andExpect(content().string(
+                        "{\"status\":103," +
+                                "\"error\":\"Failed to convert value of type 'java.lang.String' to required type 'long'; nested exception is java.lang.NumberFormatException: For input string: \\\"500d\\\"\"}"
+                ));
+
+    }
+
+
+
+
 
 }

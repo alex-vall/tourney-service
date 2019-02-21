@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 //TODO: controller exception handling
 //TODO: cashing?
 //TODO: MyBatis?
+//TODO: validation
 
 
 @SpringBootApplication

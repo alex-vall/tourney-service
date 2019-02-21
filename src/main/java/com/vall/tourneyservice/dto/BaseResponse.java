@@ -12,6 +12,10 @@ import lombok.Value;
 @Builder
 public class BaseResponse {
 
-    private long status;
+    @Builder.Default
+    private long status = ResponseStatus.OK.getStatus();
+
+    @Builder.Default
+    private String error = "";
 
 }
