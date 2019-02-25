@@ -12,7 +12,7 @@ import org.springframework.data.repository.query.Param;
 public interface PlayerChoiceRepository extends CrudRepository<PlayerChoice, Long> {
 
 
-    @Query("SELECT * from player_choices  where memberid = :memberID and tourneyid = :tourneyID")
+    @Query("SELECT * from player_choices  where member_id = :memberID and tourney_id = :tourneyID")
     PlayerChoice findByMemberIDAndTourneyID(@Param("memberID")long memberID, @Param("tourneyID")long tourneyID);
 
 

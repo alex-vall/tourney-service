@@ -23,13 +23,13 @@ public class PlayerChoice {
 
     @Id
     @Wither
-//    @Column("player_choiceid")
-    private final Long player_choiceid;
+    @Column("choice_id")
+    private final Long choiceID;
 
-    @Column("memberid")
+    @Column("member_id")
     private final long memberID;
 
-    @Column("tourneyid")
+    @Column("tourney_id")
     private final long tourneyID;
 
     @Wither

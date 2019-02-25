@@ -2,6 +2,7 @@ package com.vall.tourneyservice.controller;
 
 import com.vall.tourneyservice.dto.BaseResponse;
 import com.vall.tourneyservice.dto.ResponseStatus;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @ControllerAdvice
 @RestController
+@Slf4j
 public class ExceptionHandlerController {
 
 
@@ -30,6 +32,7 @@ public class ExceptionHandlerController {
 
     @ExceptionHandler(Exception.class)
     public BaseResponse handleServerError(Exception e) {
+        log.error("Error occured during process the request: ", e);
         return BaseResponse.builder().status(ResponseStatus.SERVER_ERROR.getStatus()).error(e.getMessage()).build();
     }
 

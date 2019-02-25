@@ -20,8 +20,8 @@ public interface TourneyRepository extends CrudRepository<Tourney, Long> {
 
     @Query("SELECT ts.* " +
             "from tourneys ts " +
-            "LEFT JOIN player_choices pc ON ts.tourneyid = pc.tourneyid and pc.memberid = :memberID " +
-            "WHERE (pc.tourneyid IS NULL OR pc.participation = true) AND ts.is_active = true")
+            "LEFT JOIN player_choices pc ON ts.tourney_id = pc.tourney_id and pc.member_id = :memberID " +
+            "WHERE (pc.tourney_id IS NULL OR pc.participation = true) AND ts.is_active = true")
     List<Tourney> getAllPlayersTourneys(@Param("memberID") long memberID);
 
 

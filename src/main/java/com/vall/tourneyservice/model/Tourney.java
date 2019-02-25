@@ -20,7 +20,7 @@ import java.sql.Timestamp;
 public class Tourney {
 
     @Id
-    @Column("tourneyid")
+    @Column("tourney_id")
     private  Long id;
 
     private String name;

@@ -68,7 +68,7 @@ public class TestSimpleEntity {
         assertEquals(2, choices.size());
 
         final PlayerChoice expected = PlayerChoice.builder()
-                .player_choiceid(1L)
+                .choiceID(1L)
                 .memberID(10L)
                 .tourneyID(2L)
                 .participation(false)

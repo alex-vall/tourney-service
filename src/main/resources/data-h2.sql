@@ -1,4 +1,4 @@
-INSERT INTO tourneys (tourneyid, name, is_active, start_date, finish_date)
+INSERT INTO tourneys (tourney_id, name, is_active, start_date, finish_date)
   VALUES (
     (SELECT sq_tourneyid.nextval from DUAL),
     'test tourney2',
@@ -9,7 +9,7 @@ INSERT INTO tourneys (tourneyid, name, is_active, start_date, finish_date)
     'd MMM yyyy HH:mm:ss z', 'en', 'GMT')
   );
 
-INSERT INTO tourneys (tourneyid, name, is_active, start_date, finish_date)
+INSERT INTO tourneys (tourney_id, name, is_active, start_date, finish_date)
   VALUES (
     (SELECT sq_tourneyid.nextval from DUAL),
     'test tourney1',
@@ -20,7 +20,7 @@ INSERT INTO tourneys (tourneyid, name, is_active, start_date, finish_date)
     'd MMM yyyy HH:mm:ss z', 'en', 'GMT')
   );
 
-INSERT INTO tourneys (tourneyid, name, is_active, start_date, finish_date)
+INSERT INTO tourneys (tourney_id, name, is_active, start_date, finish_date)
   VALUES (
     (SELECT sq_tourneyid.nextval from DUAL),
     'test tourney2',
@@ -31,7 +31,7 @@ INSERT INTO tourneys (tourneyid, name, is_active, start_date, finish_date)
     'd MMM yyyy HH:mm:ss z', 'en', 'GMT'),
   );
 
-  INSERT INTO tourneys (tourneyid, name, is_active, start_date, finish_date)
+  INSERT INTO tourneys (tourney_id, name, is_active, start_date, finish_date)
   VALUES (
     (SELECT sq_tourneyid.nextval from DUAL),
     'active tourney1',
@@ -42,18 +42,18 @@ INSERT INTO tourneys (tourneyid, name, is_active, start_date, finish_date)
     'd MMM yyyy HH:mm:ss z', 'en', 'GMT')
   );
 
-INSERT INTO player_choices (player_choiceid, tourneyid, memberid, participation, action_date)
+INSERT INTO player_choices (choice_id, tourney_id, member_id, participation, action_date)
   VALUES (
-    (SELECT sq_player_choiceid.nextval from DUAL),
+    (SELECT sq_choiceid.nextval from DUAL),
     2,
     10,
     FALSE,
     PARSEDATETIME('5 Dec 2018 03:05:06 GMT',
         'd MMM yyyy HH:mm:ss z', 'en', 'GMT'),
   );
-INSERT INTO player_choices (player_choiceid, tourneyid, memberid, participation, action_date)
+INSERT INTO player_choices (choice_id, tourney_id, member_id, participation, action_date)
   VALUES (
-    (SELECT sq_player_choiceid.nextval from DUAL),
+    (SELECT sq_choiceid.nextval from DUAL),
     1,
     10,
     TRUE,
